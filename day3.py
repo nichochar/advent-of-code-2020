@@ -26,7 +26,7 @@ if __name__ == '__main__':
         (1, 2),
     ]
     solutions = [solution(lines, param) for param in params]
-    print(solutions)
+    print("Solutions: ", solutions)
     total = 1
     for element in solutions:
         total *= element

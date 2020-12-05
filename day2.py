@@ -36,5 +36,5 @@ def solution(lines, is_valid_fn):
 if __name__ == '__main__':
     lines = get_lines_from_file('inputs/day2.txt')
 
-    print(f"Found {solution(lines, is_valid1)} valid passwords (solution1)")
-    print(f"Found {solution(lines, is_valid2)} valid passwords (solution2)")
+    print(f"[problem1] Found {solution(lines, is_valid1)} valid passwords")
+    print(f"[problem2] Found {solution(lines, is_valid2)} valid passwords")
