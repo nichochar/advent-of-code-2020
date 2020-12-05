@@ -1,3 +1,6 @@
+from utils import get_lines_from_file
+
+
 def is_valid1(line):
     part1, part2, password = line.split(' ')
     min_, max_ = [int(n) for n in part1.split('-')]
@@ -31,9 +34,7 @@ def solution(lines, is_valid_fn):
 
 
 if __name__ == '__main__':
-    with open('day2_input.txt', 'r') as f:
-        data = f.read()
-        lines = [x for x in data.split('\n') if x]
+    lines = get_lines_from_file('inputs/day2.txt')
 
     print(f"Found {solution(lines, is_valid1)} valid passwords (solution1)")
     print(f"Found {solution(lines, is_valid2)} valid passwords (solution2)")

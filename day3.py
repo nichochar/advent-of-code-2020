@@ -1,3 +1,6 @@
+from utils import get_lines_from_file
+
+
 def solution(lines, params):
     line_length = len(lines[0])
     count = 0
@@ -13,10 +16,7 @@ def solution(lines, params):
 
 
 if __name__ == '__main__':
-    with open('day3_input.txt', 'r') as f:
-        data = f.read()
-        lines = data.split('\n')
-        trim_lines = [line for line in lines if line]
+    lines = get_lines_from_file('inputs/day3.txt')
 
     params = [
         (1, 1),
@@ -25,7 +25,7 @@ if __name__ == '__main__':
         (7, 1),
         (1, 2),
     ]
-    solutions = [solution(trim_lines, param) for param in params]
+    solutions = [solution(lines, param) for param in params]
     print(solutions)
     total = 1
     for element in solutions:

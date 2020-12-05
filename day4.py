@@ -90,7 +90,7 @@ def solution(passports):
 
 
 if __name__ == '__main__':
-    with open('day4_input.txt', 'r') as f:
+    with open('inputs/day4.txt', 'r') as f:
         data = f.read()
         split_data = data.split('\n\n')
         passports = [x for x in split_data if x]

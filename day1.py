@@ -2,7 +2,7 @@ TARGET = 2020
 
 
 def solution1():
-    with open('day1_input.txt', 'r') as f:
+    with open('inputs/day1.txt', 'r') as f:
         data = f.read()
         raw_values = data.split('\n')
         values = [int(val) for val in raw_values if val]
@@ -24,7 +24,7 @@ def solution1():
 
 
 def solution2():
-    with open('day1_input.txt', 'r') as f:
+    with open('inputs/day1.txt', 'r') as f:
         data = f.read()
         raw_values = data.split('\n')
         values = [int(val) for val in raw_values if val]

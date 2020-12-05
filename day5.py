@@ -35,7 +35,7 @@ def get_one_result(seat):
 
 
 if __name__ == '__main__':
-    lines = get_lines_from_file('day5_input.txt')
+    lines = get_lines_from_file('inputs/day5.txt')
     results = []
     for seat in lines:
         results.append(get_one_result(seat))
