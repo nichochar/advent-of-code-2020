@@ -1,4 +1,5 @@
 import re
+from utils import get_lines_from_file
 
 
 REQUIRED_KEYS = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"]
@@ -90,9 +91,5 @@ def solution(passports):
 
 
 if __name__ == '__main__':
-    with open('inputs/day4.txt', 'r') as f:
-        data = f.read()
-        split_data = data.split('\n\n')
-        passports = [x for x in split_data if x]
-
+    passports = get_lines_from_file('inputs/day4.txt', sep="\n\n")
     print(f"Found {solution(passports)} valid passports out of {len(passports)}")
