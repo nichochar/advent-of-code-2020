@@ -27,14 +27,27 @@ if __name__ == '__main__':
     print(f"Jolt count 3 diff: {jolt_count_3}")
     print(f"{jolt_count_1} * {jolt_count_3} = {jolt_count_1 * jolt_count_3}")
 
-    # For the solution to problem 2, we need to use the permutation formula
-    # https://www.mathplanet.com/education/algebra-2/discrete-mathematics-and-probability/permutations-and-combinations
-    # P(n, r) = n! / (n - r)!
-    # In our example, the 3 jolt deltas separate the 1 jot delta areas. Since we have no 2 jolt deltas
-    # (thank god) we can simply multiply each P with each other, and that should give us the total permutations
+    # For the solution to problem 2, we need to use the permutation math
+    # First we subdivide the problem by breaking into sub-slices
+    # around the 3-deltas. Those are basically immutable and give us a
+    # set of subproblems.
+    # Then each sub-slice has a length of 1, 2 or 3:
+    # For length 1: either have it or don't: 2 options
+    # For length 2: example is [1, 2, 3],
+    # Our permutation options (given the ordering constraint):
+    # []
+    # [1]
+    # [1, 2]
+    # [2]
+    # For length 3: example [1, 2, 3], we count 7 permutatinos
+
+    # Let's add the 0 and the adapter in our array, to manage
+    # boundary conditions better
     new_lines = [0]
     new_lines.extend(lines)
     new_lines.extend([lines[len(lines) - 1] + 3])
+    print("New lines, with the plug (0) and the adapter (max+3):", new_lines)
+
     sub_slices = []
     current = 0
     previous_cursor = 0
@@ -45,7 +58,6 @@ if __name__ == '__main__':
             previous_cursor = i
         current = new_lines[i]
 
-    print(new_lines)
     combination_count = 1
     # We notice that subslices are only of size 0, 1, 2, 3, 4.
     # We can easily manually count the permutations of such sub-problems
