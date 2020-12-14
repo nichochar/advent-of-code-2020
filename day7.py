@@ -39,13 +39,8 @@ def parse_rule(rule):
     return parent_color, final_children
 
 
-if __name__ == '__main__':
-    rules = get_lines_from_file('inputs/day7_debug.txt')
-    print(f"Found a total of {len(rules)} bag colors")
-
+def create_graph(rules):
     nodes_index = {}
-    reversed_index = defaultdict(list)
-
     # Go over once and create all nodes
     for rule in rules:
         parent_color, children_colors = parse_rule(rule)
@@ -59,8 +54,16 @@ if __name__ == '__main__':
             child_node = nodes_index[child_tuple[1]]
             parent_node.add_child(child_node, int(child_tuple[0]))
             child_node.add_parent(parent_node)
+    return nodes_index
 
-    # Now traverse the tree starting at shiny gold to get all parents
+
+if __name__ == '__main__':
+    rules = get_lines_from_file('inputs/day7.txt')
+    print(f"Found a total of {len(rules)} bag colors")
+
+    nodes_index = create_graph(rules)
+
+    # Traverse the tree starting at shiny gold to get all parents
     parents_visited = set()
 
     def traverse_parents_from(node):
@@ -70,22 +73,19 @@ if __name__ == '__main__':
 
         for parent_node in node.parents:
             traverse_parents_from(parent_node)
-
-    children_visited = set()
-
-    outer = {'total': 0}
-
-    def traverse_children_from(node, num_parent_bags):
-        for (weight, child_node) in node.weighted_children:
-            outer['total'] += (1 + weight) * num_parent_bags
-            traverse_children_from(child_node, weight * num_parent_bags)
-
-        outer['total'] += 1
-
-
     traverse_parents_from(nodes_index['shiny gold'])
-    result = traverse_children_from(nodes_index['shiny gold'], 1)
 
     print(f"Total bags in shiny gold is {nodes_index['shiny gold'].total_bags}")
     print(f"Found {len(parents_visited) - 1} sources that lead to containing a shiny gold bag")
-    print(f" Found {result} total bags necessary within a shiny gold")
+
+    # Traverse using BFS with a queue
+    q = [nodes_index['shiny gold']]
+    total = 0
+    while len(q) != 0:
+        current = q[0]
+        q.pop(0)
+        total += 1
+        for (weight, child) in current.weighted_children:
+            for i in range(weight):
+                q.append(child)
+    print(f"A shiny gold bag must contain {total - 1} bags")
